@@ -322,21 +322,21 @@ The decision of the Brain comes in the form of an action array passed to the
 the `Vector Action` `Space Type` and `Space Size` settings of the
 agent's Brain. The RollerAgent uses the continuous vector action space and needs
 two continuous control signals from the Brain. Thus, we will set the Brain
-`Space Size` to 2. The first element,`action[0]` determines the force
-applied along the x axis; `action[1]` determines the force applied along the z
+`Space Size` to 2. The first element,`vectorAction[0]` determines the force
+applied along the x axis; `vectorAction[1]` determines the force applied along the z
 axis. (If we allowed the Agent to move in three dimensions, then we would need
 to set `Vector Action Size` to 3.) Note that the Brain really has no idea what the values in
 the action array mean. The training process just adjusts the action values in
 response to the observation input and then sees what kind of rewards it gets as
 a result.
 
-The RollerAgent applies the values from the `action[]` array to its Rigidbody
+The RollerAgent applies the values from the `vectorAction[]` array to its Rigidbody
 component, `rBody`, using the `Rigidbody.AddForce` function:
 
 ```csharp
 Vector3 controlSignal = Vector3.zero;
-controlSignal.x = action[0];
-controlSignal.z = action[1];
+controlSignal.x = vectorAction[0];
+controlSignal.z = vectorAction[1];
 rBody.AddForce(controlSignal * speed);
 ```
 
@@ -462,7 +462,7 @@ the RollerAgent only has an `Action Size` of two, we will use one key to specify
 positive values and one to specify negative values for each action, for a total
 of four keys.
 
-1. Select the `RollerBallPlayer` Aset to view its properties in the Inspector.
+1. Select the `RollerBallPlayer` Asset to view its properties in the Inspector.
 2. Expand the **Key Continuous Player Actions** dictionary (only visible when using
     a **PlayerBrain**).
 3. Set **Size** to 4.
